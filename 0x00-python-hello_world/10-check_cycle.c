@@ -23,7 +23,15 @@ int check_cycle(listint_t *list)
 		head = head->next;
 		tail = tail->next->next;
 		if (head == tail)
+		{
+			head - list;
+			while (head != tail)
+			{
+				head = head->next;
+				tail = tail ->next;
+			}
 			return (1);
+		}
 	}
 	return (0);
 }
