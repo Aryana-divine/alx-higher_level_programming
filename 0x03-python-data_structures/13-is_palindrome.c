@@ -3,7 +3,7 @@
 #include "lists.h"
 
 /**
- * main - check the code for Holberton School student.
+ * main - check the code for Holberton School students.
  *
  * Return: Always 0.
  */
