@@ -24,5 +24,11 @@ void free_listint(listint_t *head);
 listint_t *insert_node(listint_t **head, int number);
 int is_palindrome(listint_t **head);
 def element_at(my_list, idx);
+def replace_in_list(my_list, idx, element);
+def print_reversed_list_integer(my_list=[]);
+def new_in_list(my_list, idx, element);
+def no_c(my_string);
+def print_matrix_integer(matrix=[[]]);
+
 
 #endif
