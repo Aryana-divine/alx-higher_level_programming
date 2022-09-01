@@ -17,6 +17,6 @@ if __name__ == "__main__":
             print(f"{a} * {b} = {calculator_1.mul(a, b)}")
         elif operator == '/':
             print(f"{a} / {b} = {calculator_1.div(a, b)}")
-        else
+        else:
             print("Unknown operator. Available operators: +, -, * and /")
             exit(1)
