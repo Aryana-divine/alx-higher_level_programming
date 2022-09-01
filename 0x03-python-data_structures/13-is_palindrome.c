@@ -1,56 +1,62 @@
-#include <stddef.h>
-#include <stdlib.h>
 #include "lists.h"
+#include <stdio.h>
 
-/**
- * list_len - finds no. of elements ina linked list.
- * @h: pointer to linked list.
- *
- * Return: number of elements in linked list.
- */
-size_t list_len(listint_t *h)
+int is_palindrome(listint_t **head)
 {
-	size_t  nodes = 0;
+	listint_t *nhead, *tort, *hare, *ptort;
+	listint_t *cut = NULL, *half, *it1, *it2;
 
-	if (h == NULL)
-		return (0);
-	while (h != NULL)
+	if (!head || !*head)
+		return (1);
+	nhead = *head;
+	if (nhead->next != NULL)
 	{
-		nodes++;
-		h = h->next;
+		for (hare = nhead, tort = nhead; hare != NULL && hare->next
+				!= NULL; ptort = tort, tort = tort->next)
+			hare = hare->next->next;
+		if (hare != NULL)
+		{
+			cut = tort;
+			tort = tort->next;
+		}
+		ptort->next = NULL;
+		half = tort;
+		it1 = reverse_listint(&half);
+		for (it2 = *head; it2; it1 = it1->next, it2 = it2->next)
+		{
+			if (it2->n != it1->n)
+				return (0);
+		}
+		if (cut == NULL)
+			ptort->next = half;
+		else
+		{
+			ptort->next = cut;
+			cut->next = half;
+		}
 	}
-	return (nodes);
+	return (1);
 }
 
 /**
- * is_palindrome - checks if a singly linked list is a palindrome.
- * @head: double pointert to head of d-list.
+ *reverse_listint - Reverses a linked list in pladce
+ * @head: Pointer to a pointer pointing to the first item in the list
  *
- * Return: 1 if palindrome, 0 otherwise.
+ * Return: The new head of the reversed list
  */
-int is_palindrome(listint_t **head)
-{  
-	int *nArr, i = 0, j = 0, len = 0; 
-	listint_t *temp;
+listint_t *reverse_listint(listint_t **head)
+{
+	listint_t *next = NULL, *prev = NULL;
 
-	if (*head == NULL)
-		return (1);
-	temp = *head;
-	len = list_len(temp);
-	nArr = (int *)malloc(sizeof(int) * len);
-	if (nArr == NULL)
-		return (2);
-	temp = *head;
-	while (temp != NULL)
+	if (!head || !*head)
+		return (NULL);
+	while ((*head)->next)
 	{
-		nArr[j] = temp->n; 
-		j++;
-		temp = temp->next;
+		next = (*head)->next;
+		(*head)->next = prev;
+		prev = *head;
+		*head = next;
 	}
-	for (i = 0, j = len - 1; i < j; i++, j--)
-	{
-		if (nArr[i] != nArr[j])
-			return (0);
-	}
-	return (1);
+	(*head)->next = prev;
+	return (*head);
 }
